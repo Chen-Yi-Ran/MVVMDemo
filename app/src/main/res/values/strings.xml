@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MVVMDemo</string>
+    <string name="InputPassword">请输入密码</string>
+    <string name="Password">密码</string>
+    <string name="LoginText">账号</string>
+    <string name="Login">登录</string>
+    <string name="InputAccount">请输入账号</string>
+</resources>
