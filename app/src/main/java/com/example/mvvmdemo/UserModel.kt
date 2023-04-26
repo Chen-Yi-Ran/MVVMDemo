@@ -35,6 +35,11 @@ class UserModel {
         //api.login
 
         //有结果，此操作为耗时操作
+        //向服务器提交数据，这个时候，会使用非主线程去操作
+        //异步操作，通知UI的时候，要切换主线程，否则报错
+        //因为UI只能在主线程更新
+
+
 
         //0..1
         val randomValue = random.nextInt(2)

@@ -43,7 +43,6 @@ class LoginActivity : AppCompatActivity(), LoginPresenter.OnDoLoginStateChange,
                 loginPresenter.checkUserNameState(p0.toString(),this@LoginActivity)
 
             }
-
         })
     }
 
@@ -59,39 +58,41 @@ class LoginActivity : AppCompatActivity(), LoginPresenter.OnDoLoginStateChange,
             //提示用户说当前用户名已经被注册了
             return
         }
+        //异步操作
         loginPresenter.doLogin(account,password,this)
     }
 
     override fun onAccountFormatError() {
-        loginTipsText.text="账号不可为空..."
+        loginTipsText?.text="账号不可为空..."
     }
 
     override fun onPasswordEmpty() {
-        loginTipsText.text="密码不可为空..."
+        loginTipsText?.text="密码不可为空..."
     }
 
     override fun onLoading() {
-        loginTipsText.text="登录中..."
+        loginTipsText?.text="登录中..."
 
     }
 
     override fun onLoginSuccess() {
-        loginTipsText.text="登录成功..."
+        //可能登录时候你退出去，loginTipsText销毁为null，会报空指针，所以判空
+        loginTipsText?.text="登录成功..."
     }
 
     override fun onLoginFailed() {
-        loginTipsText.text="登录失败..."
+        loginTipsText?.text="登录失败..."
     }
 
     override fun onNotExist() {
         //用户名不可用
-        loginTipsText.text="该用户名已经注册了"
+        loginTipsText?.text="该用户名已经注册了"
         isUserNameCanBeUse=false
     }
 
     override fun onExist() {
         //用户名可用
-        loginTipsText.text="该用户名可以使用"
+        loginTipsText?.text="该用户名可以使用"
         isUserNameCanBeUse=true
     }
 }
