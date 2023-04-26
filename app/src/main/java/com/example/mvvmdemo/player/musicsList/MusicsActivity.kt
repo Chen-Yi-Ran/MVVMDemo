@@ -1,16 +1,19 @@
 package com.example.mvvmdemo.player.musicsList
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.mvvmdemo.R
+import com.example.mvvmdemo.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_musics.*
 
-class MusicsActivity : AppCompatActivity() {
+class MusicsActivity : BaseActivity() {
 
     private val musicPresenter by lazy {
         MusicPresenter()
     }
 
+    init {
+        addLifeListener(musicPresenter)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,28 +47,5 @@ class MusicsActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        musicPresenter.onStart()
-    }
 
-    override fun onResume() {
-        super.onResume()
-        musicPresenter.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        musicPresenter.onPause()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        musicPresenter.onDestroy()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        musicPresenter.onStop()
-    }
 }

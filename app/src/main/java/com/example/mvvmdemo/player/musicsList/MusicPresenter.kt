@@ -52,6 +52,8 @@ class MusicPresenter :ILifecycle{
 
     override fun onStart() {
         println("监听GPS信号变化")
+
+        //开始监听网络变化
     }
 
     override fun onResume() {
@@ -64,6 +66,8 @@ class MusicPresenter :ILifecycle{
 
     override fun onStop() {
         println("停止GPS的信号变化")
+
+        //停止网络状态信息变化更新
 
     }
 

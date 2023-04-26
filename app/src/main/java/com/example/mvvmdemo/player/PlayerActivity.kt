@@ -3,12 +3,21 @@ package com.example.mvvmdemo.player
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.mvvmdemo.R
+import com.example.mvvmdemo.base.BaseActivity
+import com.example.mvvmdemo.player.musicsList.MusicPresenter
 import kotlinx.android.synthetic.main.activity_player.*
 
-class PlayerActivity : AppCompatActivity(){
+class PlayerActivity : BaseActivity(){
 
     private val playerPresenter by lazy {
         PlayerPresenter.instance
+    }
+    private val musicPresenter by lazy {
+        MusicPresenter()
+    }
+    init {
+        addLifeListener(musicPresenter)
+        addLifeListener(playerPresenter)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

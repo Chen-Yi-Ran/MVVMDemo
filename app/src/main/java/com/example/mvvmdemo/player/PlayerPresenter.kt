@@ -1,5 +1,6 @@
 package com.example.mvvmdemo.player
 
+import com.example.mvvmdemo.lifecycle.ILifecycle
 import com.example.mvvmdemo.player.domain.Music
 
 
@@ -20,7 +21,7 @@ import com.example.mvvmdemo.player.domain.Music
  * - 更新UI状态为暂停
  */
 //做成单例类，保存同一个对象，使用Presenter数据一样，私有化构造
-class PlayerPresenter private constructor() {
+class PlayerPresenter private constructor() :ILifecycle{
 
      var currentMusic = DataListenerContainer<Music>()
 
@@ -139,5 +140,35 @@ class PlayerPresenter private constructor() {
       //  dispatchCoverChange("切换到上一首，封面变化了...")
         currentPlayState.value = PlayState.PLAYING
     }
+    override fun onCreate() {
 
+
+
+
+    }
+
+    override fun onStart() {
+        println("监听网络状态变化")
+
+        //开始监听网络变化
+    }
+
+    override fun onResume() {
+
+    }
+
+    override fun onPause() {
+
+    }
+
+    override fun onStop() {
+        println("停止网络状态变化监听")
+
+        //停止网络状态信息变化更新
+
+    }
+
+    override fun onDestroy() {
+
+    }
 }

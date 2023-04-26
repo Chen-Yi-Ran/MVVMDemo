@@ -12,15 +12,15 @@
         android:theme="@style/Theme.MVVMDemo">
         <activity android:name=".player.musicsList.MusicsActivity">
 
+
+        </activity>
+        <activity android:name=".player.FlowPlayerControllerActivity" />
+        <activity android:name=".player.PlayerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".player.FlowPlayerControllerActivity" />
-        <activity android:name=".player.PlayerActivity">
-
         </activity>
         <activity android:name=".LoginActivity" />
     </application>
