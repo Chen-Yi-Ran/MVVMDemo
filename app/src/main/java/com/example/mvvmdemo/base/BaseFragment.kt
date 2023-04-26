@@ -1,24 +1,20 @@
 package com.example.mvvmdemo.base
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.example.mvvmdemo.lifecycle.ILifecycle
+import androidx.fragment.app.Fragment
 import com.example.mvvmdemo.lifecycle.LifeState
 import com.example.mvvmdemo.lifecycle.LifecycleProvider
 
-open class BaseActivity:AppCompatActivity() {
+open class BaseFragment:Fragment() {
 
 
-     val lifeProvider by lazy {
-         LifecycleProvider()
-     }
-
-
+   val lifeProvider by lazy {
+        LifecycleProvider()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifeProvider.makeLifeState(LifeState.CREATE)
     }
-
 
     override fun onStart() {
         super.onStart()
@@ -35,13 +31,13 @@ open class BaseActivity:AppCompatActivity() {
         lifeProvider.makeLifeState(LifeState.PAUSE)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        lifeProvider.makeLifeState(LifeState.DESTROY)
-    }
-
     override fun onStop() {
         super.onStop()
         lifeProvider.makeLifeState(LifeState.STOP)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        lifeProvider.makeLifeState(LifeState.DESTROY)
     }
 }

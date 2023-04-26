@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.mvvmdemo.R
 import com.example.mvvmdemo.base.BaseActivity
+import com.example.mvvmdemo.lifecycle.LifecycleProvider
 import com.example.mvvmdemo.player.musicsList.MusicPresenter
 import kotlinx.android.synthetic.main.activity_player.*
 
@@ -16,8 +17,8 @@ class PlayerActivity : BaseActivity(){
         MusicPresenter()
     }
     init {
-        addLifeListener(musicPresenter)
-        addLifeListener(playerPresenter)
+       lifeProvider.addLifeListener(musicPresenter)
+        lifeProvider.addLifeListener(playerPresenter)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

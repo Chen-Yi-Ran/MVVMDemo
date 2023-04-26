@@ -12,7 +12,7 @@ class MusicsActivity : BaseActivity() {
     }
 
     init {
-        addLifeListener(musicPresenter)
+        lifeProvider.addLifeListener(musicPresenter)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
