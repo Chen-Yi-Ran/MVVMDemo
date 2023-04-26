@@ -5,7 +5,7 @@ import android.os.Bundle
 import com.example.mvvmdemo.R
 import kotlinx.android.synthetic.main.activity_player.*
 
-class PlayerActivity : AppCompatActivity(), IPlayerCallback {
+class PlayerActivity : AppCompatActivity(){
 
     private val playerPresenter by lazy {
         PlayerPresenter.instance
@@ -15,9 +15,35 @@ class PlayerActivity : AppCompatActivity(), IPlayerCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
 
-        playerPresenter.registerCallback(this)
+ //       playerPresenter.registerCallback(this)
 
-        initListener()
+       initListener()
+
+        initDataListener()
+    }
+
+    /**
+     * 对数据进行监听
+     */
+    private fun initDataListener() {
+        playerPresenter.currentMusic.addListener {
+            //音乐内容发生变化，更新UI
+            songTitle.text = it?.name
+            println("封面改变了...${it?.cover}")
+
+
+        }
+        playerPresenter.currentPlayState.addListener {
+            when (it) {
+                PlayerPresenter.PlayState.PAUSE -> {
+                    playerOrPauseBtn.text = "播放"
+                }
+                PlayerPresenter.PlayState.PLAYING -> {
+                    playerOrPauseBtn.text = "暂停"
+                }
+            }
+        }
+
     }
 
     /**
@@ -38,34 +64,34 @@ class PlayerActivity : AppCompatActivity(), IPlayerCallback {
     }
 
 
-    override fun onDestroy() {
-        super.onDestroy()
-        playerPresenter.unRegisterCallback(this)
-    }
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        playerPresenter.unRegisterCallback(this)
+//    }
 
-    override fun onTitleChange(title: String) {
-        songTitle?.text=title
-
-    }
-
-    override fun onProgressChange(current: Int) {
-
-    }
-
-    override fun onPlaying() {
-        //播放中--->显示暂停
-        playerOrPauseBtn.text="暂停"
-
-    }
-
-    override fun onPlayingPause() {
-         //暂停--->显示播放
-        playerOrPauseBtn.text="播放"
-    }
-
-    override fun onCoverChange(cover: String) {
-
-        print("封面改变了...$cover")
-
-    }
+//    override fun onTitleChange(title: String) {
+//        songTitle?.text = title
+//
+//    }
+//
+//    override fun onProgressChange(current: Int) {
+//
+//    }
+//
+//    override fun onPlaying() {
+//        //播放中--->显示暂停
+//        playerOrPauseBtn.text = "暂停"
+//
+//    }
+//
+//    override fun onPlayingPause() {
+//        //暂停--->显示播放
+//        playerOrPauseBtn.text = "播放"
+//    }
+//
+//    override fun onCoverChange(cover: String) {
+//
+//        print("封面改变了...$cover")
+//
+//    }
 }

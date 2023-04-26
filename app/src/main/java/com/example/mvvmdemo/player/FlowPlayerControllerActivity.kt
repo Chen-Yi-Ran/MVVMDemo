@@ -5,7 +5,7 @@ import android.os.Bundle
 import com.example.mvvmdemo.R
 import kotlinx.android.synthetic.main.activity_player.*
 
-class FlowPlayerControllerActivity : AppCompatActivity(), IPlayerCallback {
+class FlowPlayerControllerActivity : AppCompatActivity() {
 
     private val playerPresenter by lazy {
         PlayerPresenter.instance
@@ -13,8 +13,20 @@ class FlowPlayerControllerActivity : AppCompatActivity(), IPlayerCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_flow_player_controller)
-        playerPresenter.registerCallback(this)
+      //  playerPresenter.registerCallback(this)
         initListener()
+
+        initDataListener()
+    }
+
+    private fun initDataListener() {
+        playerPresenter.currentPlayState.addListener {
+            playerOrPauseBtn.text=if(it==PlayerPresenter.PlayState.PLAYING){
+                "暂停"
+            }else{
+                "播放"
+            }
+        }
     }
 
     private fun initListener() {
@@ -24,29 +36,5 @@ class FlowPlayerControllerActivity : AppCompatActivity(), IPlayerCallback {
         }
     }
 
-    override fun onTitleChange(title: String) {
 
-    }
-
-    override fun onProgressChange(current: Int) {
-
-    }
-
-    override fun onPlaying() {
-        playerOrPauseBtn.text="暂停"
-
-    }
-
-    override fun onPlayingPause() {
-        playerOrPauseBtn.text="播放"
-    }
-
-    override fun onCoverChange(cover: String) {
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        playerPresenter.unRegisterCallback(this)
-    }
 }
