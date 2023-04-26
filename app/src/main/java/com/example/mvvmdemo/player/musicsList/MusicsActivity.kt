@@ -43,4 +43,29 @@ class MusicsActivity : AppCompatActivity() {
             musicPresenter.getMusic()
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        musicPresenter.onStart()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        musicPresenter.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        musicPresenter.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        musicPresenter.onDestroy()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        musicPresenter.onStop()
+    }
 }

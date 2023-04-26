@@ -1,9 +1,10 @@
 package com.example.mvvmdemo.player.musicsList
 
+import com.example.mvvmdemo.lifecycle.ILifecycle
 import com.example.mvvmdemo.player.DataListenerContainer
 import com.example.mvvmdemo.player.domain.Music
 
-class MusicPresenter {
+class MusicPresenter :ILifecycle{
 
     private val musicModel by lazy {
         MusicModel()
@@ -40,5 +41,33 @@ class MusicPresenter {
 
 
         })
+    }
+
+    override fun onCreate() {
+
+
+
+
+    }
+
+    override fun onStart() {
+        println("监听GPS信号变化")
+    }
+
+    override fun onResume() {
+
+    }
+
+    override fun onPause() {
+
+    }
+
+    override fun onStop() {
+        println("停止GPS的信号变化")
+
+    }
+
+    override fun onDestroy() {
+
     }
 }
