@@ -2,7 +2,19 @@ package com.example.mvvmdemo
 
 import java.util.*
 
+/**
+ * Model层进行数据处理并回调返回给View进行数据更新
+ */
 class UserModel {
+
+
+    companion object{
+        const val STATE_LOGIN_LOADING=0
+        const val STATE_LOGIN_SUCCESS=1
+        const val STATE_LOGIN_FAILED=2
+    }
+
+
 
     /**
      * 进行登录操作
@@ -12,23 +24,25 @@ class UserModel {
         API()
     }
 
+
     private val random:Random= Random()
 
-    fun doLogin(callback: OnDoLoginStateChange, account: String, password: String){
+    fun doLogin( account: String, password: String,block: (Int) -> Unit){
 
-        callback.onLoading()
+        block(STATE_LOGIN_LOADING)
 
         //开始去调用登录的API
         //api.login
 
         //有结果，此操作为耗时操作
+
         //0..1
         val randomValue = random.nextInt(2)
 
         if(randomValue==0){
-            callback.onLoginSuccess()
+            block(STATE_LOGIN_SUCCESS)
         }else{
-            callback.onLoginFailed()
+            block(STATE_LOGIN_FAILED)
         }
     }
 
@@ -38,12 +52,5 @@ class UserModel {
         block(random.nextInt(2))
     }
 
-    interface OnDoLoginStateChange{
-        fun onLoading()
-
-        fun onLoginSuccess()
-
-        fun onLoginFailed()
-    }
 
 }
