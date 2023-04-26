@@ -29,6 +29,8 @@ class MusicsActivity : AppCompatActivity() {
             println(Thread.currentThread().name)
              //数据变化
             println("加载状态--->${it?.size}")
+
+            musicCountText?.text="加载到了 --- >${it?.size}条数据"
         }
 
         musicPresenter.loadState.addListener {
